@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require "bundler/setup"
+require "tribalcollege/cli"
 require './lib/tribal_college'
 
 Tribalcollege::CLI.new.call
