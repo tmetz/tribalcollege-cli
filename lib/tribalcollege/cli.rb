@@ -1,6 +1,14 @@
+require_relative 'scraper.rb'
+require_relative 'college.rb'
+
 class Tribalcollege::CLI
+  
+  URL = 'http://www.aihec.org/who-we-serve/TCUroster-profiles.htm'
+  
   def call
     command = ""
+    get_colleges
+    
     while command != '4'
       puts("Welcome to the tribal college directory!")
       puts("For information/help, type 1")
@@ -29,11 +37,18 @@ class Tribalcollege::CLI
   end
   
   def list_colleges
-    
+    Tribalcollege::College.all.each do |college|
+      puts college.name
+    end
   end
   
   def select_state
     
+  end
+  
+  def get_colleges
+    colleges_array = Tribalcollege::Scraper.scrape(URL)
+    Tribalcollege::College.create_from_collection(colleges_array)
   end
   
 end
