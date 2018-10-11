@@ -7,7 +7,7 @@ class Tribalcollege::Scraper
     doc = Nokogiri::HTML(open(url))
     colleges = []
     #9u 12u(mobile) important(mobile) printSection
-    doc.css('div table.t01 tr td.cell20a').each do |college|
+    doc.css('table.t01 tr td.cell20a').each do |college|
       college_hash = {
         :name => college.css("a").attribute("href").text,
         #:state => college.css("a p").text,
