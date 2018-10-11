@@ -6,13 +6,15 @@ class Tribalcollege::Scraper
   def self.scrape(url)
     doc = Nokogiri::HTML(open(url))
     colleges = []
-    doc.css("table.t01").each do |college|
+    #9u 12u(mobile) important(mobile) printSection
+    doc.css('div table.t01 tr td.cell20a').each do |college|
       college_hash = {
-        :name => college.css("tbody tr td a").attribute("href").text,
+        :name => college.css("a").attribute("href").text,
         #:state => college.css("a p").text,
         #:phone => ,
-        :college_url => college.css("tbody tr td a").attribute("href").value
+        :college_url => college.css("a").attribute("href").value
       }
+      puts college_hash[name]
       colleges << college_hash
     end
     colleges
