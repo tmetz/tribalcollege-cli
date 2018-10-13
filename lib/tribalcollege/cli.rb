@@ -10,7 +10,7 @@ class Tribalcollege::CLI
     get_colleges
     puts Tribalcollege::College.all
     puts Tribalcollege::College.all.size
-    
+     
     while command != '4'
       puts("Welcome to the tribal college directory!")
       puts("For information/help, type 1")
