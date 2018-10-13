@@ -8,18 +8,17 @@ class Tribalcollege::Scraper
   def self.scrape(url)
     doc = Nokogiri::HTML(open(url))
     @colleges = []
-    puts doc.xpath('//*[@id="t01"]/tbody/tr[1]').text
+    #puts doc.xpath('//*[@id="t01"]/tbody/tr[1]').text
     
     #9u 12u(mobile) important(mobile) printSection
-    doc.css('div.content-wrapper div.content div.container div.row table.t01 tr td.cell20a').each do |college|
+    doc.xpath('//*[@id="t01"]/tbody/tr').each do |college|
       college_hash = {
-        :name => college.css("a").attribute("href").text,
+        :name => college.css("a").text,
         #:state => college.css("a p").text,
         #:phone => ,
-        :college_url => college.css("a").attribute("href").value
+        :url => college.css("a").attribute("href").value
       }
-      puts college_hash[name]
-      colleges << college_hash
+      @colleges << college_hash
     end
     @colleges
   end
