@@ -8,6 +8,8 @@ class Tribalcollege::CLI
   def call
     command = ""
     get_colleges
+    puts Tribalcollege::College.all
+    puts Tribalcollege::College.all.size
     
     while command != '4'
       puts("Welcome to the tribal college directory!")
@@ -48,6 +50,8 @@ class Tribalcollege::CLI
   
   def get_colleges
     colleges_array = Tribalcollege::Scraper.scrape(URL)
+    puts colleges_array
+    puts colleges_array.size
     Tribalcollege::College.create_from_collection(colleges_array)
   end
   

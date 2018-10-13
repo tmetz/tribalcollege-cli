@@ -5,12 +5,12 @@ class Tribalcollege::College
 
   def initialize(colleges_hash)
     colleges_hash.each {|key, value| self.send(("#{key}="), value)}
-    @@all << self
   end
 
   def self.create_from_collection(colleges_array)
     colleges_array.each do |college|
       new_college = Tribalcollege::College.new(college)
+      @@all << new_college
     end
   end
   
