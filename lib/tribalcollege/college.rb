@@ -13,6 +13,9 @@ class Tribalcollege::College
     colleges_array.each do |college|
       new_college = Tribalcollege::College.new(college)
       @@all << new_college
+      
+      # Now store each college by the state it is located in, using
+      # the @@all_by_state hash
       if @@all_by_state.include?(new_college.state)
         @@all_by_state[new_college.state] << new_college
       else

@@ -4,6 +4,10 @@ require 'open-uri'
 class Tribalcollege::Scraper
 
   def self.scrape(url)
+    # Get the text from the AIHEC tribal college list web page
+    # then identify and store the name, state, phone number and url
+    # for each colleges
+    
     doc = Nokogiri::HTML(open(url))
     colleges = []
 
