@@ -7,7 +7,7 @@ class Tribalcollege::CLI
   
   def call
     command = ""
-    get_colleges
+    get_colleges # pre-scrape everything so it is ready to display
      
     while command != '4'
       puts("Welcome to the tribal college directory!")
@@ -63,7 +63,8 @@ class Tribalcollege::CLI
       state_string += state + " "
     end
     puts state_string
-    command = gets.strip
+    
+    command = gets.strip.upcase
     puts "\nTHE FOLLOWING COLLEGES ARE IN THE STATE OF #{command}: \n\n"
     Tribalcollege::College.all_by_state[command].each do |college|
       puts college.name

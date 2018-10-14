@@ -16,7 +16,8 @@ class Tribalcollege::College
       if @@all_by_state.include?(new_college.state)
         @@all_by_state[new_college.state] << new_college
       else
-        @@all_by_state[new_college.state] = []
+        # create a new hash element for this state that is an array, then add college
+        @@all_by_state[new_college.state] = [] 
         @@all_by_state[new_college.state] << new_college
       end
     end
