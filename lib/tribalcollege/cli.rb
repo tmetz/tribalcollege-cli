@@ -50,13 +50,15 @@ class Tribalcollege::CLI
   
   def list_colleges
     puts "\n\n"
-    Tribalcollege::College.all.each do |college|
-      puts college.name
-      puts college.state
-      puts college.phone
-      puts college.url 
-      puts "\n"
+    Tribalcollege::College.all.each_with_index do |college, index|
+      puts "#{index+1}. #{college.name}"
     end
+    puts "Which college would you like more information about?"
+    college_choice = gets.strip.to_i
+    puts Tribalcollege::College.all[college_choice-1].name
+    puts Tribalcollege::College.all[college_choice-1].state
+    puts Tribalcollege::College.all[college_choice-1].phone
+    puts Tribalcollege::College.all[college_choice-1].url
   end
   
   def select_state
