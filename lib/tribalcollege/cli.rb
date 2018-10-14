@@ -13,12 +13,13 @@ class Tribalcollege::CLI
   def show_menu
     command = ""
     while command != '4'
-      puts("Welcome to the tribal college directory!")
-      puts("For information/help, type 1")
-      puts("To list all tribal colleges, type 2")
-      puts("To list all tribal colleges in a specific state, type 3")
-      puts("To quit, type 4")
-      puts("What would you like to do?")
+      puts"Welcome to the tribal college directory!"  
+      puts "Please enter the number of the option you would like: \n"
+      puts"1. Information/help"
+      puts"2. List all tribal colleges"
+      puts"3. List all tribal colleges in a specific state"
+      puts"4. Quit"
+      puts"What would you like to do?"
       command = gets.strip
       case command
       when "1"
