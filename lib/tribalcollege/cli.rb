@@ -33,20 +33,46 @@ class Tribalcollege::CLI
   end
   
   def list_help
-    
+    puts "This gem accesses information from the American Indian Higher Education"
+    puts "Consortium to provide a list of all tribal colleges in the United States."
+    puts "According to the AIHEC website, \"Each of these institutions was created and" 
+    puts "chartered by its own tribal government for a specific purpose: to provide higher"
+    puts "education opportunities to American Indians through programs that are locally"
+    puts "and culturally based, holistic, and supportive. All TCUs offer associate degree"
+    puts "programs; 14 offer baccalaureate programs; five offer master's degree programs.\""
+    puts "\n"
+    puts "To access this information, select from one of the menu options provided.\n\n"
   end
   
   def list_colleges
+    puts "\n\n"
     Tribalcollege::College.all.each do |college|
       puts college.name
       puts college.state
       puts college.phone
       puts college.url 
+      puts "\n"
     end
   end
   
   def select_state
-    
+    puts("Enter the state abbreviation (e.g. AZ)")
+    puts("The states that have tribal colleges are: ")
+    state_string = ""
+    Tribalcollege::College.all_by_state.keys.sort.each do |state|
+      state_string += state + " "
+    end
+    puts state_string
+    command = gets.strip
+    puts "\nTHE FOLLOWING COLLEGES ARE IN THE STATE OF #{command}: \n\n"
+    Tribalcollege::College.all_by_state[command].each do |college|
+      puts college.name
+      puts college.state
+      puts college.phone
+      puts college.url 
+      puts "\n"
+    end
+    puts "\n"
   end
   
   def get_colleges

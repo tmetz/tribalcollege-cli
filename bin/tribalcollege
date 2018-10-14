@@ -2,6 +2,6 @@
 
 require "bundler/setup"
 require "tribalcollege/cli"
-require './lib/tribal_college'
+#require './lib/tribal_college'
 
 Tribalcollege::CLI.new.call
