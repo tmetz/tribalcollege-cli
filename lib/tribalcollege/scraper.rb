@@ -2,12 +2,10 @@ require 'nokogiri'
 require 'open-uri'
 
 class Tribalcollege::Scraper
-  
-  attr_reader :colleges
 
   def self.scrape(url)
     doc = Nokogiri::HTML(open(url))
-    @colleges = []
+    colleges = []
 
     doc.xpath('//*[@id="t01"]/tbody/tr').each do |college|
       address = college.css("td.cell20a br")[1].next.text.strip
@@ -18,8 +16,8 @@ class Tribalcollege::Scraper
         :phone => college.css("td.cell20a br")[2].next.text.strip,
         :url => college.css("a").attribute("href").value
       }
-      @colleges << college_hash
+      colleges << college_hash
     end
-    @colleges
+    colleges
   end
 end

@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: run ./bin/tribalcollege and then follow the menu prompts.
+Run ./bin/tribalcollege and then follow the menu prompts.
 
 
 ## Contributing
