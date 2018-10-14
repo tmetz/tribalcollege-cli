@@ -6,9 +6,12 @@ class Tribalcollege::CLI
   URL = 'http://www.aihec.org/who-we-serve/TCUroster-profiles.htm'
   
   def call
-    command = ""
     get_colleges # pre-scrape everything so it is ready to display
-     
+    show_menu
+  end
+  
+  def show_menu
+    command = ""
     while command != '4'
       puts("Welcome to the tribal college directory!")
       puts("For information/help, type 1")
