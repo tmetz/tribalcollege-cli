@@ -40,6 +40,8 @@ class Tribalcollege::CLI
     Tribalcollege::College.all.each do |college|
       puts college.name
       puts college.state
+      puts college.phone
+      puts college.url 
     end
   end
   
