@@ -1,9 +1,4 @@
-require_relative 'scraper.rb'
-require_relative 'college.rb'
-
 class Tribalcollege::CLI
-  
-  URL = 'http://www.aihec.org/who-we-serve/TCUroster-profiles.htm'
   
   def call
     get_colleges # pre-scrape everything so it is ready to display
@@ -55,24 +50,35 @@ class Tribalcollege::CLI
     end
     puts "Which college would you like more information about?"
     college_choice = gets.strip.to_i
-    puts Tribalcollege::College.all[college_choice-1].name
-    puts Tribalcollege::College.all[college_choice-1].state
-    puts Tribalcollege::College.all[college_choice-1].phone
-    puts Tribalcollege::College.all[college_choice-1].url
+    if college_choice  > 0 && college_choice <= Tribalcollege::College.all.size
+      puts Tribalcollege::College.all[college_choice-1].name
+      puts Tribalcollege::College.all[college_choice-1].state
+      puts Tribalcollege::College.all[college_choice-1].phone
+      puts Tribalcollege::College.all[college_choice-1].url
+    else
+      puts "Sorry, that is not a valid choice."
+      list_colleges
+    end
   end
   
   def select_state
     puts("Enter the state abbreviation (e.g. AZ)")
     puts("The states that have tribal colleges are: ")
     state_string = ""
-    Tribalcollege::College.all_by_state.keys.sort.each do |state|
+    state_list = []
+    Tribalcollege::College.all.each do |college|
+      if !state_list.include?(college.state)
+        state_list << college.state
+      end
+    end
+    state_list.sort.each do |state|
       state_string += state + " "
     end
     puts state_string
     
     command = gets.strip.upcase
     puts "\nTHE FOLLOWING COLLEGES ARE IN THE STATE OF #{command}: \n\n"
-    Tribalcollege::College.all_by_state[command].each do |college|
+    Tribalcollege::College.all_by_state(command).each do |college|
       puts college.name
       puts college.state
       puts college.phone
@@ -83,7 +89,7 @@ class Tribalcollege::CLI
   end
   
   def get_colleges
-    colleges_array = Tribalcollege::Scraper.scrape(URL)
+    colleges_array = Tribalcollege::Scraper.scrape
     Tribalcollege::College.create_from_collection(colleges_array)
   end
   

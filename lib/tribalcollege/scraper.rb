@@ -1,14 +1,11 @@
-require 'nokogiri'
-require 'open-uri'
-
 class Tribalcollege::Scraper
-
-  def self.scrape(url)
+  URL = 'http://www.aihec.org/who-we-serve/TCUroster-profiles.htm'
+  def self.scrape
     # Get the text from the AIHEC tribal college list web page
     # then identify and store the name, state, phone number and url
     # for each colleges
     
-    doc = Nokogiri::HTML(open(url))
+    doc = Nokogiri::HTML(open(URL))
     colleges = []
 
     doc.xpath('//*[@id="t01"]/tbody/tr').each do |college|
